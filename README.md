@@ -29,3 +29,11 @@ In this snippet, the `lines` method creates an iterator over the stream’s cont
 In this commit we updated the handle_connection method to correctly format the HTTP response headers so that the browser can render a proper HTML page. I changed the HTML content to display a custom message and ensured that the Content-Length header accurately reflects the size of the response body. This adjustment clarified for me how critical it is to adhere to HTTP protocol requirements so that browsers can properly process and display content. I learned that the Content-Length header is essential as it informs the client of the exact size of the data to be received, which is crucial for correct rendering. Additionally, I discovered that using BufReader improves the efficiency of stream reading, reducing the need for repeated system calls. Overall, this exercise not only enhanced my understanding of TCP stream handling but also deepened my appreciation for the intricacies of crafting valid HTTP responses.
 
 ![Commit 2 screen capture](assets/images/commit2.png)
+
+## Commit 3 Reflection notes
+
+Validating the Request and Selectively Responding
+
+In this commit, I followed the instructions in Chapter 20 to validate incoming requests and selectively generate responses. I updated the handle_connection function to check whether the request line is "GET / HTTP/1.1" for a valid page or something else (like "GET /bad HTTP/1.1") for an error page. Splitting the response into two distinct parts was necessary because the HTTP status line and response body need to differ for successful and unsuccessful requests. Refactoring the code in this way improved readability and maintainability, ensuring that each response type is handled in its own block. This separation of concerns allows me to easily add or modify specific responses without affecting the rest of the logic. I also captured a screenshot of my browser rendering the custom error message when navigating to a bad URL.
+
+![Commit 3 screen capture](assets/images/commit3.png)
