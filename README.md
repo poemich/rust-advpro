@@ -23,3 +23,9 @@ let http_request: Vec<_> = buf_reader
 ```
 
 In this snippet, the `lines` method creates an iterator over the stream’s content, and each line is unwrapped to obtain the string data. The `take_while` method ensures that reading stops when an empty line is encountered, which traditionally marks the end of the HTTP request header. Finally, the collected lines are printed out, providing a clear view of the request structure.
+
+## Commit 2 Reflection notes
+
+In this commit we updated the handle_connection method to correctly format the HTTP response headers so that the browser can render a proper HTML page. I changed the HTML content to display a custom message and ensured that the Content-Length header accurately reflects the size of the response body. This adjustment clarified for me how critical it is to adhere to HTTP protocol requirements so that browsers can properly process and display content. I learned that the Content-Length header is essential as it informs the client of the exact size of the data to be received, which is crucial for correct rendering. Additionally, I discovered that using BufReader improves the efficiency of stream reading, reducing the need for repeated system calls. Overall, this exercise not only enhanced my understanding of TCP stream handling but also deepened my appreciation for the intricacies of crafting valid HTTP responses.
+
+![Commit 2 screen capture](assets/images/commit2.png)
